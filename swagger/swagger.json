@@ -1,0 +1,100 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API de Blagues",
+      "version": "1.0.0",
+      "description": "Documentation de l'API de Blagues avec Swagger"
+    },
+    "paths": {
+      "/api/v1/blagues": {
+        "get": {
+          "summary": "Récupérer toutes les blagues",
+          "description": "Récupère toutes les blagues disponibles.",
+          "responses": {
+            "200": {
+              "description": "Succès de la récupération des blagues.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Blague"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/blagues/{id}": {
+        "get": {
+          "summary": "Récupérer une blague par ID",
+          "description": "Récupère une blague spécifique en fonction de son ID.",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID de la blague à récupérer."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Succès de la récupération de la blague.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Blague"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "La blague spécifiée n'a pas été trouvée."
+            }
+          }
+        }
+      },
+      "/api/v1/blagues/random": {
+        "get": {
+          "summary": "Récupérer une blague au hasard",
+          "description": "Récupère une blague aléatoire parmi celles disponibles.",
+          "responses": {
+            "200": {
+              "description": "Succès de la récupération de la blague.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Blague"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Blague": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "question": {
+              "type": "string"
+            },
+            "reponse": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+  

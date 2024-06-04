@@ -4,6 +4,7 @@ const version = "v1";
 const PORT = process.env.PORT || 3000;
 const { Sequelize } = require('sequelize');
 const Blague = require('./models/Blagues');
+const setupSwagger = require('./mildeware/swagger.js');
 
 // Middleware pour parser le JSON
 app.use(express.json());
@@ -11,6 +12,9 @@ app.use(express.json());
 // Routes
 const jokesRoutes = require('./routes/routes.js');
 app.use(`/api/${version}/blagues`, jokesRoutes);
+
+// Intégration de Swagger
+setupSwagger(app);
 
 // Synchroniser la base de données et démarrer le serveur
 const sequelize = Blague.sequelize;
