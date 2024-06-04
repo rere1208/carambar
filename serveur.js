@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const version = "v1";
+const cors = require ("cors");
 const PORT = process.env.PORT || 3000;
 const { Sequelize } = require('sequelize');
 const Blague = require('./models/Blagues');
@@ -8,6 +9,7 @@ const setupSwagger = require('./mildeware/swagger.js');
 
 // Middleware pour parser le JSON
 app.use(express.json());
+app.use(cors()); // Utilisation du middleware cors
 
 // Routes
 const jokesRoutes = require('./routes/routes.js');
